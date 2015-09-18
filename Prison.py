@@ -1,48 +1,12 @@
-__author__ = 'BigBear'
+__author__ = 'Mitch Powell'
 from Classes import *
 import random
 
-class prisoner:
-    def __init__(self,name, visitstate, visited, leader):
-        self.name = name
-        self.visitstate = visitstate
-        self.visited = visited
-        self.leader =  leader
-class switch:
-    def __init__(self, Astate, Bstate):
-        self.Astate = Astate
-        self.Bstate = Bstate
-
-    def Aswitch(self):
-        self.Astate = not self.Astate
-    def Bswitch(self):
-        self.Bstate = not self.Bstate
-
-def PopPrison():
-    a = prisoner('a',False,0,True)
-    b = prisoner('b',False,0,False)
-    c = prisoner('c',False,0,False)
-    d = prisoner('d',False,0,False)
-    e = prisoner('e',False,0,False)
-    f = prisoner('f',False,0,False)
-    g = prisoner('g',False,0,False)
-    h = prisoner('h',False,0,False)
-    i = prisoner('i',False,0,False)
-    j = prisoner('j',False,0,False)
-    k = prisoner('k',False,0,False)
-    l = prisoner('l',False,0,False)
-    m = prisoner('m',False,0,False)
-    n = prisoner('n',False,0,False)
-    o = prisoner('o',False,0,False)
-    p = prisoner('p',False,0,False)
-    q = prisoner('q',False,0,False)
-    r = prisoner('r',False,0,False)
-    s = prisoner('s',False,0,False)
-    t = prisoner('t',False,0,False)
-    u = prisoner('u',False,0,False)
-    v = prisoner('v',False,0,False)
-    w = prisoner('w',False,0,False)
-    prislist = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w]
+def PopPrison(population):
+    prislist = []
+    prislist.append(prisoner(False,0,True))
+    for pris in range(0,(population-1)):
+        prislist.append(prisoner(False,0,False))
     return(prislist)
 
 def initialize():
@@ -57,14 +21,14 @@ def initialize():
         Switch = switch(False,False)
     return(Switch)
 
-def run():
-    Prislist = PopPrison()
+def run(prisoners):
+    Prislist = PopPrison(prisoners)
     Switch = initialize()
     prisoncount = 0
     Selectcount = 0
     while True:
-        Selected = random.randint(0,22)
-        if prisoncount == 44:
+        Selected = random.randint(0,len(Prislist)-1)
+        if prisoncount == (2*(prisoners-1)):
             break
         elif Prislist[Selected].leader == True:         #if the leader is selected
             if Switch.Astate == True:                   #and the left switch is up
@@ -81,9 +45,11 @@ def run():
     return(Selectcount)
 
 def Main():
-    total = 0
-    iterations = 5000
+    total = 1
+    iterations = 1000
+    prisoners = 40
     for x in range(iterations):
-        total += run()
-    print("Average number of selections to algorithm completion: "+str(total/iterations))
+        total += run(prisoners)
+    print("Average number of prisoner selections to algorithm completion: "+str(total/iterations))
+
 Main()

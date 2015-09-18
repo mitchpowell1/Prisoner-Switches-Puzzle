@@ -1,7 +1,6 @@
-__author__ = 'BigBear'
+__author__ = 'Mitch Powell'
 class prisoner:
-    def __init__(self,name, visitstate, visited, leader):
-        self.name = name
+    def __init__(self, visitstate, visited, leader):
         self.visitstate = visitstate
         self.visited = visited
         self.leader =  leader
@@ -11,12 +10,6 @@ class switch:
         self.Bstate = Bstate
 
     def Aswitch(self):
-        if self.Astate == True:
-            self.Astate = False
-        else:
-            self.Astate = True
+        self.Astate = not self.Astate
     def Bswitch(self):
-        if self.Bstate == True:
-            self.Bstate = False
-        else:
-            self.Bstate = True
+        self.Bstate = not self.Bstate
