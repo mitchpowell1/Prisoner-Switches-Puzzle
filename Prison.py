@@ -45,7 +45,7 @@ def run(prisoners):
     return(Selectcount)
 
 def Main():
-    total = 1
+    total = 0
     iterations = 1000
     prisoners = 40
     for x in range(iterations):
